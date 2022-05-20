@@ -14,24 +14,11 @@ jobs:
         uses: actions/checkout@v3  
         with:
           fetch-depth: 0
-      - name: Shell
-        run: |
-          pwd
-          ls -la
-          tree -a -I ".git"
-          echo "Getting changed files"
-          git diff --name-only HEAD HEAD~1
-          echo $USERNA  | wc -c
-          echo ${{ secrets.FUCKIT }} | wc -c
-        env:
-          USERNA:  ${{ secrets.FUCKIT }}
-          
-          
       - name: Myaction
         uses: jakubowy/docker-images/.github/actions/build-docker-image@main
         with:
-          username: ${{ secrets.FUCKIT }}
-          password: ${{ secrets.FUCKIT }}
+          username: ${{ secrets.CR_USER }}
+          password: ${{ secrets.CR_PASS }}
         
         
   docker:
@@ -45,22 +32,19 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.CR_USER }}
+          password: ${{ secrets.CR_PASS }}
       - name: Debuk
         id: maketags
         run: |
           echo "===== $GITHUB_RUN_ID"
-          echo "IMAGE_NAME=jakubowy/nodered-hassio:$GITHUB_RUN_ID" >> $GITHUB_ENV
-          echo "runid: ${{ env.GITHUB_RUN_ID }}"
-
       - name: Docker meta
         id: meta # you'll use this in the next step
         uses: docker/metadata-action@v3
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/nodered-hassio
+            ${{ secrets.CR_USER }}/nodered-hassio
           # Docker tags based on the following events/attributes
           tags: |
             type=schedule
