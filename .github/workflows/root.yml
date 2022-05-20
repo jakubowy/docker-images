@@ -21,7 +21,7 @@ jobs:
           #tree -a -I ".git"
           #echo "Getting changed files"
           #git diff --name-only HEAD HEAD~1
-          echo "${{ github.event }}"
+          cat ${GITHUB_EVENT_PATH}
           DDIR=$(git diff --name-only HEAD HEAD~1 |cut -d '/' -f 1)
           DFILE=$(find ${DDIR} -type f |grep -io "dockerfile.*")
           echo "DOCKER_DIR=${DDIR}" >> $GITHUB_ENV
