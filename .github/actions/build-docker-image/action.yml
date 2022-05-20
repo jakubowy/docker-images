@@ -7,6 +7,7 @@ inputs:
   password:
     required: true
   directory:
+    required: true
 
   
 runs:
