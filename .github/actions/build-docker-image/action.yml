@@ -1,3 +1,6 @@
+name: "Test composite action"
+description: "test composite action"
+
 inputs:
   username:
     required: true
