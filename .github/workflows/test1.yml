@@ -1,4 +1,6 @@
 name: Build image for test1
+env:
+  DDIR: test1
 on:
   push:
     paths:
@@ -11,15 +13,9 @@ jobs:
         uses: actions/checkout@v3  
         with:
           fetch-depth: 0
-      - name: Shell
+      - name: Get dockerfile path
         run: |
-          #pwd
-          #ls -la
-          #tree -a -I ".git"
-          #echo "Getting changed files"
-          #git diff --name-only HEAD HEAD~1
-          cat ${GITHUB_EVENT_PATH}
-          DDIR=$(git diff --name-only HEAD HEAD~1 |cut -d '/' -f 1)
+          #DDIR=$(git diff --name-only HEAD HEAD~1 |cut -d '/' -f 1)
           DFILE=$(find ${DDIR} -type f |grep -io "dockerfile.*")
           echo "DOCKER_DIR=${DDIR}" >> $GITHUB_ENV
           echo "DOCKER_FILE=${DFILE}" >> $GITHUB_ENV
