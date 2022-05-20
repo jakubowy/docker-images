@@ -7,9 +7,9 @@ jobs:
   testi:
     runs-on: ubuntu-latest
     steps:
-      - name: Print env
-        run: |
-          env | sort
+#      - name: Print env
+#        run: |
+#          env | sort
       - name: Checkout
         uses: actions/checkout@v3  
         with:
@@ -32,11 +32,11 @@ jobs:
           git add .
           git commit -m "Updated workflow"
           git push
-      - name: Myaction
-        uses: jakubowy/docker-images/.github/actions/build-docker-image@main
-        with:
-          username: ${{ secrets.CR_USER }}
-          password: ${{ secrets.CR_PASS }}
-          directory: ${{ env.DOCKER_DIR }}
-          dockerfile: ${{ env.DOCKER_FILE }}
-        if: "${{ env.DOCKER_FILE != '' }}"
+#      - name: Myaction
+#        uses: jakubowy/docker-images/.github/actions/build-docker-image@main
+#        with:
+#          username: ${{ secrets.CR_USER }}
+#          password: ${{ secrets.CR_PASS }}
+#          directory: ${{ env.DOCKER_DIR }}
+#          dockerfile: ${{ env.DOCKER_FILE }}
+#        if: "${{ env.DOCKER_FILE != '' }}"
