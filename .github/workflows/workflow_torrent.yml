@@ -6,7 +6,7 @@ on:
     paths:
       - 'torrent/**'
   schedule:
-    - cron: "* 0 12 1-7 * 5"
+    - cron: "0 12 1-7 * 5"
 jobs:
   build-docker-image:
     runs-on: ubuntu-latest
