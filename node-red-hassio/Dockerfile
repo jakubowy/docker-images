@@ -6,3 +6,4 @@ RUN npm install node-red-contrib-home-assistant-websocket
 #  node-red-contrib-time-range-switch \
 #  node-red-contrib-timecheck \
 #  node-red-node-timeswitch
+ 
