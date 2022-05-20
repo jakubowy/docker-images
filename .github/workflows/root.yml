@@ -22,21 +22,16 @@ jobs:
           echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
           echo $USERNA  | wc -c
-          echo ${{ secrets.DOCKERHUB_USERNAME }} | wc -c
+          echo ${{ secrets.FUCKIT }} | wc -c
         env:
-          USERNA:  ${{ secrets.DOCKERHUB_USERNAME }}
+          USERNA:  ${{ secrets.FUCKIT }}
           
           
       - name: Myaction
         uses: jakubowy/docker-images/.github/actions/build-docker-image@main
         with:
-          username: ${{ env.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          dupadupa: dupa
-        env:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          dupadupa: dupa
+          username: ${{ secrets.FUCKIT }}
+          password: ${{ secrets.FUCKIT }}
         
         
   docker:
