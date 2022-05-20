@@ -21,6 +21,8 @@ jobs:
           tree -a -I ".git"
           echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
+      - name: Myaction
+        uses: jakubowy/docker-images/.github/composite@master
   docker:
     if: ${{ false }}
     runs-on: ubuntu-latest
