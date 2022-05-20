@@ -4,13 +4,16 @@ jobs:
   testi:
     runs-on: ubuntu-latest
     steps:
+      - name: Print env
+        run: |
+          env
       - name: Checkout
         uses: actions/checkout@v3
       - name: Shell
         run: |
           pwd
           ls -la
-          tree
+          tree -a
   docker:
     if: ${{ false }}
     runs-on: ubuntu-latest
