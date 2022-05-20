@@ -14,6 +14,7 @@ jobs:
           pwd
           ls -la
           tree -a
+          echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
   docker:
     if: ${{ false }}
