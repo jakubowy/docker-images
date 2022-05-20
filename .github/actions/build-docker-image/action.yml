@@ -39,7 +39,7 @@ runs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          ${{ inputs.username }}/nodered-hassio
+          ${{ inputs.username }}/${{ inputs.directory }}
         # Docker tags based on the following events/attributes
         tags: |
           type=schedule
