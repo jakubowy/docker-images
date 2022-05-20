@@ -20,7 +20,8 @@ jobs:
           ls -la
           tree -a -I ".git"
           touch .github/arse
-          git add .
+          git config --global user.name "jakubowy"
+          git config --global user.email "30290482+jakubowy@users.noreply.github.com"
           git commit -m "Updated workflow"
           git push
       - name: Myaction
