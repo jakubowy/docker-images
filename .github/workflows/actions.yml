@@ -1,7 +1,16 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
+  testi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Shell
+        run: |
+          pwd
+          ls -la
+          tree
   docker:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
