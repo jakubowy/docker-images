@@ -24,7 +24,7 @@ jobs:
           DDIR=$(git diff --name-only HEAD HEAD~1 |cut -d '/' -f 1)
           DFILE=$(find ${DDIR} -type f |grep -io "dockerfile.*")
           echo "DOCKER_DIR=${DDIR}" >> $GITHUB_ENV
-          echo "DOCKER_FILE=Dockerfile_dupa" >> $GITHUB_ENV
+          echo "DOCKER_FILE=${DFILE}" >> $GITHUB_ENV
       - name: Myaction
         uses: jakubowy/docker-images/.github/actions/build-docker-image@main
         with:
