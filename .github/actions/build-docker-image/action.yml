@@ -1,6 +1,7 @@
 runs:
 #  if: ${{ false }}
 #  runs-on: ubuntu-latest
+  using: composite
   steps:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
