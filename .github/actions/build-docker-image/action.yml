@@ -8,6 +8,8 @@ inputs:
     required: true
   directory:
     required: true
+  dockerfile:
+    required: true
 
   
 runs:
@@ -54,8 +56,8 @@ runs:
       id: docker_build
       uses: docker/build-push-action@v2
       with:
-#          context: .
-#          file: Dockerfile
+        context: ${{ inputs.directory }}
+        file: ${{ inputs.dockerfile }}
         platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
         tags: ${{ steps.meta.outputs.tags }}
