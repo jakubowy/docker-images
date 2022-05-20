@@ -26,6 +26,7 @@ jobs:
         with:
           username: ${{ secrets.CR_USER }}
           password: ${{ secrets.CR_PASS }}
+          directory: test1
         
         
   docker:
