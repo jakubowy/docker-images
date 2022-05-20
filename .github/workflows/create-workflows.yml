@@ -17,7 +17,7 @@ jobs:
           token: ${{ secrets.WF_TOKEN }}
       - name: Shell
         run: |
-          rm ".github/workflows/workflow_*"
+          rm .github/workflows/workflow_*
           for image in $(find ./ -maxdepth 1 -type d -not -name ".*"); do
             IMAGE_NAME=$(printf ${image} |cut -d '/' -f 2)
             echo "Creating workflow for ${IMAGE_NAME}"
