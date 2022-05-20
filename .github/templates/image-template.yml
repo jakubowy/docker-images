@@ -1,4 +1,4 @@
-name: Image build\: #IMAGE_DIRECTORY
+name: "Image build: #IMAGE_DIRECTORY"
 env:
   DDIR: #IMAGE_DIRECTORY
 on:
