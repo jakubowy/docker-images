@@ -24,7 +24,7 @@ jobs:
             IMAGE_NAME=$(printf ${image} |cut -d '/' -f 2)
             echo "Creating workflow for ${IMAGE_NAME}"
             cp ".github/templates/image-template.yml" ".github/workflows/workflow_${IMAGE_NAME}"
-            sed "s/#IMAGE_DIRECTORY/${IMAGE_NAME}/g" ".github/workflows/workflow_${IMAGE_NAME}"
+            sed -i "s/#IMAGE_DIRECTORY/${IMAGE_NAME}/g" ".github/workflows/workflow_${IMAGE_NAME}"
           done
           git config --global user.name "jakubowy"
           git config --global user.email "30290482+jakubowy@users.noreply.github.com"
