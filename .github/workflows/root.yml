@@ -22,7 +22,7 @@ jobs:
           echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
       - name: Myaction
-        uses: jakubowy/docker-images/.github/composite@master
+        uses: jakubowy/docker-images/.github/composite@main
   docker:
     if: ${{ false }}
     runs-on: ubuntu-latest
