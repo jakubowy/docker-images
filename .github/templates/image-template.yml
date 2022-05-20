@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - '#IMAGE_DIRECTORY/**'
+  schedule:
+    - cron: "*0 12 1-7 * 5"
 jobs:
   build-docker-image:
     runs-on: ubuntu-latest
