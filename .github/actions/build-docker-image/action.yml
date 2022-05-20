@@ -1,7 +1,7 @@
 name: "Test composite action"
 description: "test composite action"
 
-inputs:
+secrets:
   username:
     required: true
   password:
@@ -17,9 +17,9 @@ runs:
     - name: Print
       shell: bash
       run: |
-        echo ${{ inputs.username }} |wc -c
-        echo ${{ inputs.password }} |wc -c
-        echo ${{ inputs.dupadupa }} 
+        echo ${{ secrets.username }} |wc -c
+        echo ${{ secrets.password }} |wc -c
+        echo ${{ secrets.dupadupa }} |wc -c
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
