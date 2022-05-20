@@ -57,7 +57,7 @@ runs:
       uses: docker/build-push-action@v2
       with:
         context: ${{ inputs.directory }}
-        file: ${{ inputs.dockerfile }}
+        file: ${{ inputs.directory }}/${{ inputs.dockerfile }}
         platforms: linux/amd64,linux/arm64,linux/arm/v7
         push: true
         tags: ${{ steps.meta.outputs.tags }}
