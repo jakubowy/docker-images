@@ -1,5 +1,8 @@
 name: GitHub Actions Demo
-on: [push]
+on:
+  push:
+    paths:
+      - '.github/**'
 jobs:
   testi:
     runs-on: ubuntu-latest
