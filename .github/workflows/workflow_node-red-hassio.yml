@@ -5,8 +5,10 @@ on:
   push:
     paths:
       - 'node-red-hassio/**'
+  schedule:
+    - cron: "*0 12 1-7 * 5"
 jobs:
-  testi:
+  build-docker-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
