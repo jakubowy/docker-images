@@ -17,18 +17,15 @@ jobs:
           token: ${{ secrets.WF_TOKEN }}
       - name: Shell
         run: |
-          pwd
-          ls -la
-          tree -a -I ".git"
-          echo $(date) > .github/arse
+          rm ".github/workflows/workflow_*"
           for image in $(find ./ -maxdepth 1 -type d -not -name ".*"); do
             IMAGE_NAME=$(printf ${image} |cut -d '/' -f 2)
             echo "Creating workflow for ${IMAGE_NAME}"
             cp ".github/templates/image-template.yml" ".github/workflows/workflow_${IMAGE_NAME}.yml"
             sed -i "s/#IMAGE_DIRECTORY/${IMAGE_NAME}/g" ".github/workflows/workflow_${IMAGE_NAME}.yml"
           done
-          git config --global user.name "jakubowy"
-          git config --global user.email "30290482+jakubowy@users.noreply.github.com"
+          git config --global user.name "ghactions"
+          git config --global user.email "30290482+ghactions@users.noreply.github.com"
           git add .
           git commit -m "Updated workflow"
           git push
