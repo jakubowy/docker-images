@@ -27,6 +27,7 @@ jobs:
           username: ${{ secrets.CR_USER }}
           password: ${{ secrets.CR_PASS }}
           directory: test1
+          dockerfile: Dockerfile_dupa
         
         
   docker:
