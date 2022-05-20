@@ -1,4 +1,4 @@
-name: \!Create workflows
+name: Create workflows
 on: [workflow_dispatch]
 #  push:
 #    paths:
@@ -20,7 +20,7 @@ jobs:
           ls -la
           tree -a -I ".git"
           echo $(date) > .github/arse
-          for image in $(find . -maxdepth 1 -type d -not -name ".*"); do
+          for image in $(find ./ -maxdepth 1 -type d -not -name ".*"); do
             echo $image
           done
           git config --global user.name "jakubowy"
