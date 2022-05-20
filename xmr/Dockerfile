@@ -21,3 +21,4 @@ WORKDIR /xmrig/build
 RUN cmake .. -DXMRIG_DEPS=scripts/deps \
  && make -j$(nproc)
 
+ 
