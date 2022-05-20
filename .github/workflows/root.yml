@@ -23,7 +23,7 @@ jobs:
           git diff --name-only HEAD HEAD~1
           
       - name: Myaction
-        uses: jakubowy/docker-images/.github/actions/demo@${{ env.GITHUB_REF_NAME }}
+        uses: jakubowy/docker-images/.github/actions/demo@main
   docker:
     if: ${{ false }}
     runs-on: ubuntu-latest
