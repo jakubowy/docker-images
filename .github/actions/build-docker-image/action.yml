@@ -12,7 +12,8 @@ secrets:
 runs:
 #  if: ${{ false }}
 #  runs-on: ubuntu-latest
-  using: composite
+  using: docker
+  image: ubuntu-latest
   steps:
     - name: Print
       shell: bash
