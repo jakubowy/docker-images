@@ -15,7 +15,7 @@ jobs:
         run: |
           pwd
           ls -la
-          tree -a
+          tree -a -I ".git/"
           echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
   docker:
