@@ -19,3 +19,4 @@ RUN groupadd -g 8112 torrent \
 
 WORKDIR /root
 CMD ["/config/bootstrap-qb-config.bash"]
+ 
