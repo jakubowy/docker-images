@@ -1,4 +1,4 @@
-name: Image build\: test1
+name: "Image build: test1"
 env:
   DDIR: test1
 on:
