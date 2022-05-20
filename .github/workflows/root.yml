@@ -24,6 +24,10 @@ jobs:
           
       - name: Myaction
         uses: jakubowy/docker-images/.github/actions/build-docker-image@main
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
   docker:
     if: ${{ false }}
     runs-on: ubuntu-latest
