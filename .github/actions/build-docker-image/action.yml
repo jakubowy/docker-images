@@ -9,6 +9,11 @@ runs:
 #  runs-on: ubuntu-latest
   using: composite
   steps:
+    - name: Print
+      shell: bash
+      run: |
+        echo ${{ inputs.username }}
+        echo ${{ inputs.password }}
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
