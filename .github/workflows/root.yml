@@ -21,8 +21,10 @@ jobs:
           tree -a -I ".git"
           echo "Getting changed files"
           git diff --name-only HEAD HEAD~1
+          echo ${{ env.USERNA }} | wc -c
           echo ${{ secrets.DOCKERHUB_USERNAME }} | wc -c
-          echo ${{ secrets.DOCKERHUB_USERNAME }} | wc -c
+        env:
+          USERNA:  ${{ secrets.DOCKERHUB_USERNAME }}
           
           
       - name: Myaction
