@@ -4,7 +4,7 @@ env:
 on:
   push:
     paths:
-      - '.test1/**'
+      - 'test1/**'
 jobs:
   testi:
     runs-on: ubuntu-latest
