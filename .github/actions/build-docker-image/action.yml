@@ -3,6 +3,8 @@ inputs:
     required: true
   password:
     required: true
+  dupadupa:
+    required: true
   
 runs:
 #  if: ${{ false }}
@@ -14,6 +16,7 @@ runs:
       run: |
         echo ${{ inputs.username }} |wc -c
         echo ${{ inputs.password }} |wc -c
+        echo ${{ inputs.dupadupa }} 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
