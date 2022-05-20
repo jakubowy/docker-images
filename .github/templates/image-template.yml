@@ -6,7 +6,7 @@ on:
     paths:
       - '#IMAGE_DIRECTORY/**'
 jobs:
-  testi:
+  build-docker-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
