@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
  && apt -y install vim curl wget dnsutils iputils-ping apt-file jq pv \
