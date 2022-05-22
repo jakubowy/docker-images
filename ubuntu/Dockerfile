@@ -4,13 +4,14 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update \
  && apt -y install \
     vim jq \
-    curl wget dnsutils iputils-ping \
+    curl wget dnsutils iputils-ping iperf3 \
     apt-file pv mlocate \
     python3 python3-pip python3-dev python3-wheel \
  && apt-file update
 
 RUN pip3 install \
     youtube-dl \
-    ansible 
+    ansible \
+    speedtest-cli
 
 RUN updatedb
