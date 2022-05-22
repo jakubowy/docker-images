@@ -7,6 +7,7 @@ RUN apt update \
     curl wget dnsutils iputils-ping iperf3 \
     apt-file pv mlocate \
     python3 python3-pip python3-dev python3-wheel \
+    libffi-dev
  && apt-file update
 
 RUN pip3 install \
