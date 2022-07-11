@@ -60,7 +60,7 @@ runs:
         file: |
           ${{ inputs.directory }}/${{ inputs.dockerfile }}
 #        file: ${{ format('{0}/{1}', inputs.directory, inputs.dockerfile) }}
-        platforms: linux/amd64#,linux/arm64 #,linux/arm/v7
+        platforms: linux/amd64 #,linux/arm64 #,linux/arm/v7
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
