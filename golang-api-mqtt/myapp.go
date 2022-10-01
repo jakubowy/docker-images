@@ -13,24 +13,25 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
+/*
 func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to the HomePage!\r\n")
 	fmt.Println("Endpoint Hit: homePage")
 }
-
+*/
 func checkType(v any, t string) {
+	// Usage: checkType(varName, "varName")
 	fmt.Printf("TYPEOF "+t+": %T\nVALUE: %s\n\n", v, v)
 }
 
-func gasMeter(w http.ResponseWriter, r *http.Request) {
+func handleRequest(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("method:", r.Method) //get request method
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("gasmeter.gtpl")
 		t.Execute(w, nil)
 	} else {
 		r.ParseForm()
-		// logic part of log in
-		fmt.Println("meter:", r.Form["meter"])
+		fmt.Println("form contents:", r.Form)
 		fmt.Fprintf(w, "Sending meter!\r\n")
 		checkType(os.Getenv("MQTT_BROKER"), "MQTT_BROKER")
 		checkType(os.Getenv("MQTT_TOPIC"), "MQTT_TOPIC")
@@ -49,12 +50,12 @@ func gasMeter(w http.ResponseWriter, r *http.Request) {
 		if token.Wait() && token.Error() != nil {
 			panic(token.Error())
 		}
-
-		topic := os.Getenv("MQTT_TOPIC")
-		metvalue, err := strconv.ParseFloat(r.Form["meter"][0], 64)
+		checkType(r.Form["topic"][0], "TOPIC")
+		topic := os.Getenv("MQTT_TOPIC") + "/" + r.Form["topic"][0]
+		reading, err := strconv.ParseFloat(r.Form["reading"][0], 64)
 
 		payload := map[string]interface{}{
-			"cubicmeters": metvalue,
+			"reading": reading,
 		}
 		jsonData, err := json.Marshal(payload)
 
@@ -74,8 +75,8 @@ func gasMeter(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleRequests() {
-	http.HandleFunc("/", homePage)
-	http.HandleFunc("/gaseo", gasMeter)
+	http.HandleFunc("/", handleRequest)
+	//http.HandleFunc("/gaseo", gasMeter)
 	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
