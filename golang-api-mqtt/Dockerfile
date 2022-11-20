@@ -6,7 +6,7 @@ COPY gasmeter.gtpl go.mod /opt/myapp/
 
 WORKDIR /opt/myapp
 
-RUN go get github.com/eclipse/paho.mqtt.golang 
+RUN go mod tidy && go get github.com/eclipse/paho.mqtt.golang 
 
 COPY myapp.go gasmeter.gtpl go.mod /opt/myapp/
 
