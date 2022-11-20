@@ -29,6 +29,7 @@
                         <option value="water-garden-ucka">Water garden Ucka</option>
                         <option value="water-cold-pop">Water cold</option>
                         <option value="water-hot-pop">Water hot</option>
+                        <option value="testtest">Test</option>
                     </select>
                     <p>
                         <label for="reading">Stan licznika:</label>
