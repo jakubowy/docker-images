@@ -65,7 +65,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Printf("json data: %s\n", jsonData)
 		// fmt.Printf("%v", r.Form)
-		token = client.Publish(topic, 0, false, jsonData)
+		token = client.Publish(topic, 0, true, jsonData)
 		token.Wait()
 		time.Sleep(time.Second)
 		client.Disconnect(100)
