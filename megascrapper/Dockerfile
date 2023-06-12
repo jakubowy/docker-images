@@ -5,7 +5,7 @@ RUN pip install PyYAML requests
 
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
-COPY app.py pge.py ./
+COPY app.py pse.py ./
 RUN adduser --system --no-create-home nonroot
 USER nonroot
 
