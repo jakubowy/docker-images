@@ -1,4 +1,4 @@
-ROM python:latest
+FROM python:latest
 
 RUN apt update
 RUN pip install PyYAML requests
