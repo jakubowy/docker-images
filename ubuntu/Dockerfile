@@ -16,3 +16,5 @@ RUN pip3 install \
     speedtest-cli
 
 RUN updatedb
+ENTRYPOINT ["/bin/bash"]
+CMD ["env"]
