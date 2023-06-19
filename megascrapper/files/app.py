@@ -38,7 +38,7 @@ match whattorun:
         #foxess.raw()
 
     case "pse":
-        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse.get((datetime.now() + timedelta(0))), write_precision='s'))
+        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse.get((datetime.now() + timedelta(1))), write_precision='s'))
     case _:
         print("Unown command")
         # 2023-06-19 15:00:00 CEST+0200
