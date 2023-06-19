@@ -110,9 +110,15 @@ def raw(config, dateandtime):
         if 'Temperation' in item['variable']:
             item['unit'] = "°C"
         for reading in item['data']:
-            #print(reading)
+            if item['unit'] == "kW":
+                item['unit'] = "W"
+                item['changed'] = True
+
+            if 'changed' in item and item['changed']:
+                reading['value'] = float(reading['value'] * 1000)
+           #print(reading)
             lista.append({"measurement": "foxess", "tags": {"unit":item['unit'], "timespan": "now"}, "fields": {item['variable']:float(reading['value'])}, "time": int(datetime.strptime(re.sub("[A-Z]{3,4}", r'', reading['time']), '%Y-%m-%d %H:%M:%S %z').timestamp())})
-    #pprint(lista)
+    pprint(lista)
     return lista
 
 
