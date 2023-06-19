@@ -32,7 +32,8 @@ else:
 
 match whattorun:
     case "foxess-now":
-        print(foxess.plant_detail(config))
+        print(write_api.write(config['foxess']['influxdb_bucket'], config['influxdb']['organization'], foxess.plant_detail(config), write_precision='s'))
+        #pprint(foxess.plant_detail(config))
     case "foxess-raw":
         print(foxess.raw(config,datetime.now(tz=ZoneInfo("Europe/Warsaw"))))
         #foxess.raw()

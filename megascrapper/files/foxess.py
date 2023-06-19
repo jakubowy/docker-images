@@ -23,6 +23,7 @@ def login(username, password):
            "contentType": "application/json"}
     data = {"user":username,"password":password}
     response = requests.post('https://www.foxesscloud.com/c/v0/user/login', data = data, headers = headers)
+    #print(data)
     token = response.json()['result']['token']
     return token
 
@@ -32,7 +33,7 @@ def check_response(response, config):
     global token
     if response.json()['errno'] == 41808:
         print("auth required")
-        update_secret(config['foxess']['secret_path_token'] ,login(get_secret(config['foxess']['secret_path_password']) , get_secret(config['foxess']['secret_path_username']) ))
+        update_secret(config['foxess']['secret_path_token'] ,login(get_secret(config['foxess']['secret_path_username']) , get_secret(config['foxess']['secret_path_password']) ))
         print("Updating token")
         return False
     return True
@@ -60,7 +61,16 @@ def plant_detail(config):
         print("rerun")
     # print(response.status_code)
     # print(response.headers)
-    return response.json()
+    utc = datetime.now(timezone.utc)
+    lista = []
+    lista.append({"measurement": "foxess", "tags": {"unit":"Wh","timespan": "now"}, "fields": {"power":float(response.json()['result']['power']) * 1000}, "time": int(utc.timestamp())})
+    for item in response.json()['result']:
+        # print(response.json()['result'][item])
+        if "generation" in str(response.json()['result'][item]):
+            lista.append({"measurement": "foxess", "tags": {"unit":"Wh","timespan":item}, "fields": {"power":float(response.json()['result'][item]['generation']) * 1000}, "time": int(utc.timestamp())})
+            #print(response.json()['result'][item]['generation'])
+    #pprint(lista)
+    return lista
 
 def raw(config, dateandtime):
     token = get_secret(config['foxess']['secret_path_token']) 
