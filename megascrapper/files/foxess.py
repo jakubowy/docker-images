@@ -95,12 +95,12 @@ def raw(config, dateandtime):
             "beginDate":{"year":dateandtime.strftime('%Y'),"month":dateandtime.strftime('%-m'),"day":dateandtime.strftime('%-d'),"hour":dateandtime.strftime('%-H'),"minute":dateandtime.strftime('%-M'),"second":dateandtime.strftime('%-S')}\
             }
     response = requests.post('https://www.foxesscloud.com/c/v0/plant/history/raw', json = data, headers = headers)
-    print(response.json())
+    #print(response.json())
     lista = []
     for item in response.json()['result']:
-        print(item['variable'])
-        print(item['unit'])
-        print(item['name'])
+        #print(item['variable'])
+        #print(item['unit'])
+        #print(item['name'])
         if 'Volt' in item['variable']:
             item['unit'] = "V"
         if 'Current' in item['variable']:
@@ -110,10 +110,10 @@ def raw(config, dateandtime):
         if 'Temperation' in item['variable']:
             item['unit'] = "°C"
         for reading in item['data']:
-            print(reading)
-            lista.append({"measurement": "solar", "tags": {"unit":item['unit'],"variable":item['variable']}, "fields": {"value":float(reading['value'])}, "time": int(datetime.strptime(re.sub("[A-Z]{3,4}", r'', reading['time']), '%Y-%m-%d %H:%M:%S %z').timestamp())})
-    pprint(lista)
-    return response
+            #print(reading)
+            lista.append({"measurement": "foxess", "tags": {"unit":item['unit'], "timespan": "now"}, "fields": {item['variable']:float(reading['value'])}, "time": int(datetime.strptime(re.sub("[A-Z]{3,4}", r'', reading['time']), '%Y-%m-%d %H:%M:%S %z').timestamp())})
+    #pprint(lista)
+    return lista
 
 
 #print(plant_detail("yz").json())
