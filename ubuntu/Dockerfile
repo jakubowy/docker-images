@@ -14,5 +14,7 @@ RUN pip3 install \
     youtube-dl \
     ansible \
     speedtest-cli
-
+  
 RUN updatedb
+ENTRYPOINT ["/bin/bash"]
+CMD ["env"]
