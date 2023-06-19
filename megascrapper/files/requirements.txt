@@ -1,0 +1,6 @@
+requests
+datetime
+influxdb-client
+google-cloud-storage
+google-cloud-secret-manager
+pyyaml

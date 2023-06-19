@@ -1,12 +1,15 @@
 FROM python:latest
 
 RUN apt update
-RUN pip install PyYAML requests
+
 
 RUN mkdir -p /opt/app
+RUN pip install requests datetime influxdb-client google-cloud-storage google-cloud-secret-manager pyyaml python-dateutil
 WORKDIR /opt/app
-COPY app.py pse.py ./
 RUN adduser --system --no-create-home nonroot
+COPY files/ ./
+#RUN pip install -r requirements.txt
 USER nonroot
 
-CMD ["python", "/opt/app/app.py"]
+ENTRYPOINT ["python", "/opt/app/app.py"]
+CMD ["pse"]
