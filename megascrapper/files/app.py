@@ -45,7 +45,7 @@ match whattorun:
             time.sleep(30)
 
     case "pse":
-        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse.get((datetime.now() + timedelta(1))), write_precision='s'))
+        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse.get((datetime.now() + timedelta(config['pse']['time_delta']))), write_precision='s'))
     case _:
         print("Unown command")
         # 2023-06-19 15:00:00 CEST+0200
