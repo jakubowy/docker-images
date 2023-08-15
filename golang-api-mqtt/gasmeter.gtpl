@@ -23,7 +23,7 @@
                 <form method="post">
                     <label for="topic">Choose a topic:</label>
                     <select id="topic" name="topic">
-                        <option value="6g4l">Gas</option>
+                        <option value="6g4l m³">Gas</option>
                         <option value="energa-ucka kWh">Electricity Ucka</option>
                         <option value="water-main-ucka m³">Water main Ucka</option>
                         <option value="water-garden-ucka m³">Water garden Ucka</option>
