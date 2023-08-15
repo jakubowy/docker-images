@@ -8,6 +8,7 @@ import sys
 from gcp_wrappers import get_config, get_secret, update_secret
 import time
 import dateutil
+from dateutil.relativedelta import relativedelta
 
 gcs_config_bucket = os.environ.get("GCS_CONFIG_BUCKET")
 config = get_config(gcs_config_bucket)
@@ -42,6 +43,12 @@ match whattorun:
         for godziny in range(config['foxess']['history_start'],config['foxess']['history_stop']):
             print(f"HISTORY MODE, PROCESSING: {godziny}")
             print(write_api.write(config['foxess']['influxdb_bucket'], config['influxdb']['organization'], foxess.raw(config,datetime.now(tz=ZoneInfo("Europe/Warsaw")) - timedelta(hours=godziny)), write_precision='s'))
+            time.sleep(30)
+    case "foxess-history-month":
+        for months in range(config['foxess']['history_start'],config['foxess']['history_stop']):
+            print(f"{config['foxess']['history_start']} --------------  {config['foxess']['history_stop']}")
+            print(f"HISTORY MODE MONTHLY, PROCESSING: {months}")
+            print(write_api.write(config['foxess']['influxdb_bucket'], config['influxdb']['organization'], foxess.raw_month(config,datetime.now(tz=ZoneInfo("Europe/Warsaw")) - relativedelta(months=months)), write_precision='s'))
             time.sleep(30)
 
     case "pse":

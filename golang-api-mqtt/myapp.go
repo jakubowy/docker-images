@@ -9,9 +9,10 @@ import (
 	"os"
 	"strconv"
 	"time"
-
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-)
+        "github.com/influxdata/influxdb-client-go/v2"
+        "strings"
+    )
 
 /*
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +52,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 			panic(token.Error())
 		}
 		checkType(r.Form["topic"][0], "TOPIC")
-		topic := os.Getenv("MQTT_TOPIC") + "/" + r.Form["topic"][0]
+                topicname := strings.Split(r.Form["topic"][0], " ")[0]
+		topic := topicname + "/" + r.Form["topic"][0]
 		reading, err := strconv.ParseFloat(r.Form["reading"][0], 64)
 
 		payload := map[string]interface{}{
@@ -70,7 +72,15 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		time.Sleep(time.Second)
 		client.Disconnect(100)
 		fmt.Fprintf(w, "Reading sent!\r\n")
-	}
+                clientinflux := influxdb2.NewClient(os.Getenv("INFLUX_HOST"), os.Getenv("INFLUX_TOKEN"))
+                writeAPI := clientinflux.WriteAPI(os.Getenv("INFLUX_ORG"), os.Getenv("INFLUX_BUCKET"))
+                metername := strings.Split(r.Form["topic"][0], " ")[0]
+                unitvalue := strings.Split(r.Form["topic"][0], " ")[1]
+                fmt.Printf("meter: %s   unit: %s\n", metername, unitvalue)
+                writeAPI.WriteRecord(fmt.Sprintf("meter,unit=%s %s=%f", unitvalue, metername, reading))
+                writeAPI.Flush()
+	        fmt.Printf("influx sent")
+            }
 
 }
 
