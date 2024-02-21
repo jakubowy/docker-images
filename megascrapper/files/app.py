@@ -9,6 +9,7 @@ from gcp_wrappers import get_config, get_secret, update_secret
 import time
 import dateutil
 from dateutil.relativedelta import relativedelta
+import foxesscloud.openapi as foxcloud
 
 gcs_config_bucket = os.environ.get("GCS_CONFIG_BUCKET")
 config = get_config(gcs_config_bucket)
@@ -31,6 +32,34 @@ else:
     whattorun = ""
 
 match whattorun:
+    case "foxesscloud-now":
+        fox_vars = config['foxess']['fox_vars']
+        foxcloud.api_key = get_secret(config['foxess']['secret_path_token'])
+        foxcloud.device_sn = config['foxess']['device_sn']
+        foxcloud.time_zone = "Europe/Warsaw"
+        foxcloud.debug_setting = 2
+        #pprint(foxcloud.get_vars())
+        #pprint(foxcloud.get_real(fox_vars))
+        fox_device = foxcloud.get_device()
+        pprint(fox_device)
+        lista = []
+        utc = datetime.now(timezone.utc)
+        for value in ["generationMonth", "generationToday", "generationTotal"]:
+            print(value + str(fox_device[value]))
+            match value:
+                case "generationMonth":
+                    timesp = "month"
+                case "generationToday":
+                    timesp = "today"
+                case "generationTotal":
+                    timesp = "cumulate"
+                case _:
+                    timesp = "unknown"
+            lista.append({"measurement": "foxess", "tags": {"unit":"Wh","timespan":timesp}, "fields": {"power":float(fox_device[value]) * 1000}, "time": int(utc.timestamp())})
+        pprint(lista)
+        print(write_api.write(config['foxess']['influxdb_bucket'], config['influxdb']['organization'], lista, write_precision='s'))
+        print(foxcloud.get_access_count())
+
     case "foxess-now":
         print(write_api.write(config['foxess']['influxdb_bucket'], config['influxdb']['organization'], foxess.plant_detail(config), write_precision='s'))
         #pprint(foxess.plant_detail(config))
