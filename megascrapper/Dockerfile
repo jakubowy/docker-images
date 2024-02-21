@@ -4,7 +4,6 @@ RUN apt update
 RUN apt install -y cmake
 
 
-
 RUN mkdir -p /opt/app
 RUN pip install requests datetime influxdb-client google-cloud-storage google-cloud-secret-manager pyyaml python-dateutil foxesscloud matplotlib
 WORKDIR /opt/app
