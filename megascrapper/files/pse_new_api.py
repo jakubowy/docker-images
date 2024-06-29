@@ -16,6 +16,7 @@ def get_report_json(query_date):
         start_time = start_time - timedelta(hours=0, minutes=15)
         print(start_time)
         lista.append({"measurement": "rce", "tags": {"unit":"PLN/MWh","timespan":"15min"}, "fields": {"price":float(item['rce_pln'])}, "time": int(start_time.timestamp())})
+    print(lista)
     return lista
 
 #print(get_report_json(datetime.today()))
