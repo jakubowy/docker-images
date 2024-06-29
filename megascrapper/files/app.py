@@ -1,4 +1,4 @@
-import pse-new-api, os, foxess
+import pse_new_api, os, foxess
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 import influxdb_client
@@ -81,7 +81,7 @@ match whattorun:
             time.sleep(30)
 
     case "pse":
-        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse-new-api.get_report_json((datetime.now() + timedelta(config['pse']['time_delta']))), write_precision='s'))
+        print(write_api.write(config['pse']['influxdb_bucket'], config['influxdb']['organization'], pse_new_api.get_report_json((datetime.now() + timedelta(config['pse']['time_delta']))), write_precision='s'))
     case _:
         print("Unown command")
         # 2023-06-19 15:00:00 CEST+0200
