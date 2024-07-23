@@ -5,7 +5,7 @@ RUN apt update \
  && apt -y install \
     vim jq \
     curl wget dnsutils iputils-ping iperf3 iproute2 net-tools traceroute \
-    apt-file pv mlocate tree ioping ffmpeg \
+    apt-file pv plocate tree ioping ffmpeg \
     python3 python3-pip python3-dev python3-wheel python3-cryptography \
     libffi-dev build-essential libssl-dev cargo\
  && apt install -y wireguard \
