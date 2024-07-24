@@ -1,0 +1,31 @@
+name: "Image build: openvpn-sidecar"
+env:
+  DDIR: openvpn-sidecar
+on:
+  push:
+    paths:
+      - 'openvpn-sidecar/**'
+  schedule:
+    - cron: "0 12 1-7 * 5"
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3  
+        with:
+          fetch-depth: 0
+      - name: Get dockerfile path
+        run: |
+          #DDIR=$(git diff --name-only HEAD HEAD~1 |cut -d '/' -f 1)
+          DFILE=$(find ${DDIR} -type f |grep -io "dockerfile.*")
+          echo "DOCKER_DIR=${DDIR}" >> $GITHUB_ENV
+          echo "DOCKER_FILE=${DFILE}" >> $GITHUB_ENV
+      - name: Build image
+        uses: jakubowy/docker-images/.github/actions/build-docker-image@main
+        with:
+          username: ${{ secrets.CR_USER }}
+          password: ${{ secrets.CR_PASS }}
+          directory: ${{ env.DOCKER_DIR }}
+          dockerfile: ${{ env.DOCKER_FILE }}
+        if: "${{ env.DOCKER_FILE != '' }}"
