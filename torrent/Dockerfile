@@ -1,10 +1,10 @@
 # syntax = docker/dockerfile:1.3-labs
 
-FROM debian:bullseye
+FROM debian:bookworm
 #FROM ubuntu:20.04
 
 RUN apt update \
- && apt -y install openvpn qbittorrent-nox
+ && apt -y install qbittorrent-nox
 
 RUN apt -y install curl vim wget procps less dnsutils iputils-ping
 
