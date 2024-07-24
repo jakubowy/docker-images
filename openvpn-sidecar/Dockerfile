@@ -8,5 +8,6 @@ RUN apt update \
     apt-file \
  && apt install -y openvpn speedtest-cli\
  && apt-file update
+ 
 
 #CMD ["wg-quick", "up", "/vpn/*.conf"]
